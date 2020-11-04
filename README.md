@@ -1,2 +1,2 @@
 # Linked-List
-This is a basic implementation of a templated linked list.
+This is a basic implementation of a templated linked list. The templated linked list will have the option to reverse the order of the list, and insert into the list in an ordered way. That would require the object being put into the list have an implementation of the <, and > operators. 
