@@ -1,37 +1,88 @@
 #include <iostream>
 
-template <typename T>
+template <class T>
 struct Node{
 
   // Member variables
   T data;
   Node<T> *next;
-
-  // Helper function for linked list
-  Node<T>* getNext();
 };
 
-template <typename U>
+template <class T>
 class LinkedList{
 private:
-  Node<U> head;
+  Node<T> head;
   bool reversed;
-  int length;
+  int the_length;
 
 public:
   LinkedList(); // Constructor
-  LinkedList(Node<U> theHead); // Overloaded Constructor
-  LinkedList(const LinkedList<U> &other); // Copy Constructor
-  LinkedList& operator= (const LinkedList<U> &other); // Assignment Operator
+  LinkedList(Node<T> theHead); // Overloaded Constructor
+  LinkedList(const LinkedList<T> &other); // Copy Constructor
+  LinkedList<T>& operator= (const LinkedList<T> &other); // Assignment Operator
   ~LinkedList(); // Destructor
 
   // Overloaded operators
+  template <class U>
   friend std::ostream& operator<<(std::ostream& out, const LinkedList<U> &f1);
-  Node& operator[](const unsigned int &i);
+  T& operator[](const unsigned int &i);
 
   // Functions for functionality
-  bool insert(U data);
-  bool remove();
+  bool insert(T data);
+  bool remove(T data);
+  bool remove(const unsigned int i);
   bool reverse();
-  bool length();
+  int length();
+};
+
+template <class T>
+LinkedList<T>::LinkedList(){} // Constructor
+
+template <class T>
+LinkedList<T>::LinkedList(const LinkedList<T> &other){} // Copy Constructor
+
+template <class T>
+LinkedList<T>& LinkedList<T>::operator= (const LinkedList<T> &other){
+  return *this;
+} // Assignment Operator
+
+template <class T>
+LinkedList<T>::~LinkedList(){} // Destructor
+
+// Overloaded operators
+template <class U>
+std::ostream& operator<<(std::ostream& out, const LinkedList<U> &f1){
+  return out;
+}
+
+template <class T>
+T& LinkedList<T>::operator[](const unsigned int &i){
+  T var;
+  return var;
+}
+
+// Functions for functionality
+template <class T>
+bool LinkedList<T>::insert(T data){
+  return false;
+}
+
+template <class T>
+bool LinkedList<T>::remove(T data){
+  return false;
+}
+
+template <class T>
+bool LinkedList<T>::remove(const unsigned int i){
+  return false;
+}
+
+template <class T>
+bool LinkedList<T>::reverse(){
+  return false;
+}
+
+template <class T>
+int LinkedList<T>::length(){
+  return 0;
 }
