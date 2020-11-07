@@ -5,19 +5,19 @@ struct Node{
 
   // Member variables
   T data;
-  Node<T> *next;
+  Node<T> *next = NULL;
 };
 
 template <class T>
 class LinkedList{
 private:
-  Node<T> head;
+  Node<T> *head;
   bool reversed;
   int the_length;
 
 public:
   LinkedList(); // Constructor
-  LinkedList(Node<T> theHead); // Overloaded Constructor
+  LinkedList(T theHead); // Overloaded Constructor
   LinkedList(const LinkedList<T> &other); // Copy Constructor
   LinkedList<T>& operator= (const LinkedList<T> &other); // Assignment Operator
   ~LinkedList(); // Destructor
@@ -33,13 +33,30 @@ public:
   bool remove(const unsigned int i);
   bool reverse();
   int length();
+  bool clear();
 };
 
 template <class T>
-LinkedList<T>::LinkedList(){} // Constructor
+LinkedList<T>::LinkedList(){
+  head = NULL;
+  reversed = false;
+  the_length = 0;
+} // Constructor
 
 template <class T>
-LinkedList<T>::LinkedList(const LinkedList<T> &other){} // Copy Constructor
+LinkedList<T>::LinkedList(T theHead){
+
+  head = new Node<T>;
+  head->data = theHead;
+
+  reversed = false;
+  the_length = 1;
+
+} // Overloaded Constructor
+
+template <class T>
+LinkedList<T>::LinkedList(const LinkedList<T> &other){
+} // Copy Constructor
 
 template <class T>
 LinkedList<T>& LinkedList<T>::operator= (const LinkedList<T> &other){
@@ -47,7 +64,18 @@ LinkedList<T>& LinkedList<T>::operator= (const LinkedList<T> &other){
 } // Assignment Operator
 
 template <class T>
-LinkedList<T>::~LinkedList(){} // Destructor
+LinkedList<T>::~LinkedList(){
+
+  // Go through the list and delete each
+  while(head){
+    Node<T> *temp = head->next;
+    head->next = NULL;
+    delete head;
+    head = temp;
+    temp = NULL;
+  }
+
+} // Destructor
 
 // Overloaded operators
 template <class U>
@@ -85,4 +113,9 @@ bool LinkedList<T>::reverse(){
 template <class T>
 int LinkedList<T>::length(){
   return 0;
+}
+
+template<class T>
+bool LinkedList<T>::clear(){
+  return false;
 }
