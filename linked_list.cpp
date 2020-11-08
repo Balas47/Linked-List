@@ -13,7 +13,7 @@ class LinkedList{
 private:
   Node<T> *head;
   bool reversed;
-  int the_length;
+  unsigned int the_length;
 
 public:
   LinkedList(); // Constructor
@@ -25,7 +25,7 @@ public:
   // Overloaded operators
   template <class U>
   friend std::ostream& operator<<(std::ostream& out, const LinkedList<U> &f1);
-  T& operator[](const unsigned int &i);
+  T operator[](const unsigned int &i);
 
   // Functions for functionality
   bool insert(T data);
@@ -84,14 +84,131 @@ std::ostream& operator<<(std::ostream& out, const LinkedList<U> &f1){
 }
 
 template <class T>
-T& LinkedList<T>::operator[](const unsigned int &i){
+T LinkedList<T>::operator[](const unsigned int &i){
+
   T var;
+  Node<T> *node = head;
+
+  // Make sure that the index is valid
+  if(node) var = node->data;
+  if(!node) throw "Empty List";
+  if(i<0 || i>=the_length) throw "Invalid Index";
+
+  for(unsigned int j=0;j<i;j++){
+    node = node->next;
+    var = node->data;
+  }
   return var;
 }
 
 // Functions for functionality
 template <class T>
 bool LinkedList<T>::insert(T data){
+
+  Node<T> *theInfo = new Node<T>;
+  theInfo->data = data;
+
+  // If the list is empty
+  if(!head){
+
+    // Put it at the head
+    head = theInfo;
+    theInfo = NULL;
+    the_length += 1;
+    return true;
+
+  }else if(head){
+
+    Node<T> *prev = NULL;
+    Node<T> *getThere = head;
+    Node<T> *getNext = head->next;
+
+    // Increasing order
+    if(!reversed){
+      while(getThere && getNext){
+
+        if(getThere->data < theInfo->data){
+          if(!prev) prev = getThere;
+          else prev = prev->next;
+          getThere = getThere->next;
+          getNext = getNext->next;
+        }else break;
+      }
+
+    // Decreading order
+    }else{
+      while(getThere && getNext){
+
+        if(getThere->data > theInfo->data){
+          if(!prev) prev = getThere;
+          else prev = prev->next;
+          getThere = getThere->next;
+          getNext = getNext->next;
+        }else break;
+      }
+    }
+
+    // If we are at the end of the list
+    if(!getNext && !prev){
+
+      if(!reversed){
+        if(getThere->data < theInfo->data) getThere->next = theInfo;
+        else{
+          head = theInfo;
+          theInfo->next = getThere;
+        }
+      }else{
+        if(getThere->data > theInfo->data) getThere->next = theInfo;
+        else{
+          head = theInfo;
+         theInfo->next = getThere;
+       }
+      }
+
+    // If we are still at the beginning of the list
+    }else if(getThere == head){
+      if(!reversed){
+        if(getThere->data < theInfo->data){
+           getThere->next = theInfo;
+           theInfo->next = getNext;
+        }else{
+          theInfo->next = getThere;
+          head = theInfo;
+        }
+      }else{
+        if(getThere->data > theInfo->data){
+           getThere->next = theInfo;
+           theInfo->next = getNext;
+        }else{
+          theInfo->next = getThere;
+          head = theInfo;
+        }
+      }
+    }else{
+
+      if(!reversed){
+        if(getThere->data < theInfo->data){
+          getThere->next = theInfo;
+          theInfo->next = getNext;
+        }else{
+          prev->next = theInfo;
+          theInfo->next = getThere;
+        }
+      }else{
+        if(getThere->data > theInfo->data){
+          getThere->next = theInfo;
+          theInfo->next = getNext;
+        }else{
+          prev->next = theInfo;
+          theInfo->next = getThere;
+        }
+      }
+    }
+
+    the_length += 1;
+    return true;
+  }
+
   return false;
 }
 
