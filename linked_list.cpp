@@ -157,6 +157,7 @@ bool LinkedList<T>::insert(T data){
           head = theInfo;
           theInfo->next = getThere;
         }
+
       }else{
         if(getThere->data > theInfo->data) getThere->next = theInfo;
         else{
@@ -175,6 +176,7 @@ bool LinkedList<T>::insert(T data){
           theInfo->next = getThere;
           head = theInfo;
         }
+
       }else{
         if(getThere->data > theInfo->data){
            getThere->next = theInfo;
@@ -184,6 +186,7 @@ bool LinkedList<T>::insert(T data){
           head = theInfo;
         }
       }
+
     }else{
 
       if(!reversed){
@@ -194,6 +197,7 @@ bool LinkedList<T>::insert(T data){
           prev->next = theInfo;
           theInfo->next = getThere;
         }
+
       }else{
         if(getThere->data > theInfo->data){
           getThere->next = theInfo;
@@ -214,6 +218,42 @@ bool LinkedList<T>::insert(T data){
 
 template <class T>
 bool LinkedList<T>::remove(T data){
+
+  if(!head) return false;
+
+  Node<T> *prev = NULL;
+  Node<T> *curr = head;
+  Node<T> *next = curr->next;
+
+  // Keep searching until we either find the item, or reach the end of the list
+  while(next && ((curr->data > data) || (curr->data < data))){
+    if(!prev) prev = head;
+    else prev = prev->next;
+    curr = curr->next;
+    next = next->next;
+  }
+
+  // If we are at the end and dont have the node
+  if((curr->data > data) || (curr->data < data)) return false;
+
+  // If the item to remove is the head
+  else if(curr == head){
+    head = next;
+    delete curr;
+    curr = NULL;
+
+    the_length--;
+    return true;
+
+  // Otherwise, we can remove the desired node
+  }else{
+    prev->next = next;
+    delete curr;
+
+    the_length--;
+    return true;
+  }
+
   return false;
 }
 
