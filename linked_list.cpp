@@ -80,6 +80,17 @@ LinkedList<T>::~LinkedList(){
 // Overloaded operators
 template <class U>
 std::ostream& operator<<(std::ostream& out, const LinkedList<U> &f1){
+
+  out << "STUFF IN LINKED LIST" << std::endl;
+
+  if(!f1.head) out << "Nothing" << std::endl;
+
+  Node<U> *theData = f1.head;
+  while(theData){
+    out << theData->data << std::endl;
+    theData = theData->next;
+  }
+
   return out;
 }
 
@@ -269,10 +280,20 @@ bool LinkedList<T>::reverse(){
 
 template <class T>
 int LinkedList<T>::length(){
-  return 0;
+  return the_length;
 }
 
 template<class T>
 bool LinkedList<T>::clear(){
-  return false;
+
+  while(head){
+    Node<T> *temp = head->next;
+    head->next = NULL;
+    delete head;
+    head = temp;
+    temp = NULL;
+    the_length--;
+  }
+
+  return true;
 }
