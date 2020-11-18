@@ -56,10 +56,77 @@ LinkedList<T>::LinkedList(T theHead){
 
 template <class T>
 LinkedList<T>::LinkedList(const LinkedList<T> &other){
+
+  // If the linked list to copy is empty
+  if(other.the_length == 0){
+    head = NULL;
+    reversed = false;
+    the_length = 0;
+
+  }else{
+
+    reversed = other.reversed;
+    the_length = other.the_length;
+    head = new Node<T>;
+    head->data = other.head->data;
+
+    Node<T> *current = head;
+    Node<T> *next = other.head->next;
+    Node<T> *copy = NULL;
+
+    // Read in all of the information and store a copy
+    while (next){
+
+      // Copy the info`
+      copy = new Node<T>;
+      copy->data = next->data;
+      current->next = copy;
+
+      // Move on to the next one
+      current = current->next;
+      next = next->next;
+      copy = NULL;
+    }
+  }
+
 } // Copy Constructor
 
 template <class T>
 LinkedList<T>& LinkedList<T>::operator= (const LinkedList<T> &other){
+
+  // Clear myself pretty much regardless
+  clear();
+
+  if(other.the_length == 0){
+    head = NULL;
+    reversed = false;
+    the_length = 0;
+
+  }else{
+
+    reversed = other.reversed;
+    the_length = other.the_length;
+    head = new Node<T>;
+    head->data = other.head->data;
+
+    Node<T> *current = head;
+    Node<T> *next = other.head->next;
+    Node<T> *copy = NULL;
+
+    // Read in all of the information and store a copy
+    while (next){
+
+      // Copy the info`
+      copy = new Node<T>;
+      copy->data = next->data;
+      current->next = copy;
+
+      // Move on to the next one
+      current = current->next;
+      next = next->next;
+      copy = NULL;
+    }
+  }
   return *this;
 } // Assignment Operator
 
@@ -275,7 +342,7 @@ bool LinkedList<T>::remove(const unsigned int i){
 
 template <class T>
 bool LinkedList<T>::reverse(){
-  return false;
+  return reversed;
 }
 
 template <class T>

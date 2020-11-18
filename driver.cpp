@@ -99,5 +99,25 @@ int main(){
   std::cout << "The length after clear() is: " << newTest.length() << std::endl;
   std::cout <<"##############################" << std::endl;
 
+  std::cout << "#####################" << std::endl;
+  std::cout << "Copy Constructor Test" << std::endl;
+  LinkedList<int> copy = myFriend;
+  std::cout << "Original" << std::endl;
+  std::cout << myFriend << std::endl;
+  std::cout << "Copy" << std::endl;
+  std::cout << copy << std::endl;
+  std::cout << "#####################\n" << std::endl;
+
+  std::cout << "########################" << std::endl;
+  std::cout << "Assignmend Operator Test" << std::endl;
+  myFriend = secondFriend;
+  std::cout << "One to Copy" << std::endl;
+  std::cout << secondFriend << std::endl;
+  std::cout << "Length: " << secondFriend.length() << std::endl;
+  std::cout << "Result (using list from last test)" << std::endl;
+  std::cout << myFriend;
+  std::cout << "Length: " << myFriend.length() << std::endl;
+  std::cout << "########################\n" << std::endl;
+
   return 0;
 }
