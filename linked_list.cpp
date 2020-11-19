@@ -337,7 +337,39 @@ bool LinkedList<T>::remove(T data){
 
 template <class T>
 bool LinkedList<T>::remove(const unsigned int i){
-  return false;
+
+  // Cases where I cannot remove
+  if(!head) return false;
+  if(i >= the_length) return false;
+
+  // Navigate to the desired location
+  Node<T> *prev = NULL;
+  Node<T> *current = head;
+  Node<T> *next = head->next;
+
+  for(unsigned int j=0;j<i;j++){
+    if(!prev) prev = head;
+    else prev = prev->next;
+    current = current->next;
+    next = next->next;
+
+    if(!next) break;
+  }
+
+  // At the head
+  if(!prev) head = next;
+
+  // At the end
+  else if(!next) prev->next = NULL;
+
+  // Anywhere else
+  else prev->next = next;
+
+  delete current;
+  current = NULL;
+  the_length--;
+
+  return true;
 }
 
 template <class T>

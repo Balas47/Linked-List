@@ -119,5 +119,40 @@ int main(){
   std::cout << "Length: " << myFriend.length() << std::endl;
   std::cout << "########################\n" << std::endl;
 
+  std::cout << "#####################" << std::endl;
+  std::cout << "Testing Index Removal" << std::endl;
+  std::cout << "Original: " << std::endl;
+  LinkedList<int> indexRem;
+  indexRem.insert(1);
+  indexRem.insert(2);
+  indexRem.insert(3);
+  indexRem.insert(4);
+  indexRem.insert(5);
+  indexRem.insert(6);
+  indexRem.insert(7);
+  indexRem.insert(8);
+  indexRem.insert(9);
+  indexRem.insert(10);
+  std::cout << indexRem;
+  std::cout << "Length: " << indexRem.length() << std::endl;
+  std::cout << "Removal of First Item" << std::endl;
+  unsigned int del = 0;
+  indexRem.remove(del);
+  std::cout << indexRem;
+  std::cout << "Length: " << indexRem.length() << std::endl;
+  std::cout << "Removal of Last Item" << std::endl;
+  del = 8;
+  indexRem.remove(del);
+  std::cout << indexRem;
+  std::cout << "Length: " << indexRem.length() << std::endl;
+  std::cout << "Removal Anywhere Else" << std::endl;
+  del = std::rand() % del;
+  std::cout << "Index to Remove: " << del << std::endl;
+  std::cout << "Item to Remove: " << indexRem[del] << std::endl;
+  indexRem.remove(del);
+  std::cout << indexRem;
+  std::cout << "Length: " << indexRem.length() << std::endl;
+  std::cout << "#####################\n" << std::endl;
+
   return 0;
 }
