@@ -78,6 +78,7 @@ int main(){
   }
   std::cout << "##########################\n" << std::endl;
 
+  // Output tests
   std::cout << "##############################" << std::endl;
   std::cout << "Testing Overloaded << Operator" << std::endl;
   LinkedList<int> newTest;
@@ -85,6 +86,7 @@ int main(){
   std::cout << newTest << std::endl;
   std::cout << "##############################\n" << std::endl;
 
+  // Testing clears
   std::cout <<"##############################" << std::endl;
   std::cout << "Testing clear() Functionality" << std::endl;
   std::cout << "The length before clear() is: " << newTest.length() << std::endl;
@@ -99,6 +101,7 @@ int main(){
   std::cout << "The length after clear() is: " << newTest.length() << std::endl;
   std::cout <<"##############################" << std::endl;
 
+  // Contructor and assigment tests
   std::cout << "#####################" << std::endl;
   std::cout << "Copy Constructor Test" << std::endl;
   LinkedList<int> copy = myFriend;
@@ -119,6 +122,7 @@ int main(){
   std::cout << "Length: " << myFriend.length() << std::endl;
   std::cout << "########################\n" << std::endl;
 
+  // Index removal tests
   std::cout << "#####################" << std::endl;
   std::cout << "Testing Index Removal" << std::endl;
   std::cout << "Original: " << std::endl;
@@ -153,6 +157,52 @@ int main(){
   std::cout << indexRem;
   std::cout << "Length: " << indexRem.length() << std::endl;
   std::cout << "#####################\n" << std::endl;
+
+  // Testing reversal
+  std::cout << "##################" << std::endl;
+  std::cout << "Reversing the List" << std::endl;
+  LinkedList<int> toReverse;
+  toReverse.insert(1);
+  toReverse.insert(2);
+  toReverse.insert(3);
+  toReverse.insert(4);
+  toReverse.insert(5);
+  toReverse.insert(6);
+  toReverse.insert(7);
+  toReverse.insert(8);
+  toReverse.insert(9);
+  toReverse.insert(10);
+  std::cout << "Original" << std::endl;
+  std::cout << toReverse << std::endl;
+  toReverse.reverse();
+  std::cout << toReverse;
+  std::cout << "##################" << std::endl;
+
+  std::cout <<"########################" << std::endl;
+  std::cout << "Insert in Reversed List" << std::endl;
+  toReverse.insert(7);
+  std::cout << toReverse;
+  std::cout << "#######################\n" << std::endl;
+
+  std::cout << "#########################" << std::endl;
+  std::cout << "Reversing a One Item List" << std::endl;
+  LinkedList<int> reverseOne;
+  reverseOne.insert(1);
+  reverseOne.reverse();
+  std::cout << reverseOne;
+  std::cout << "Insert Something" << std::endl;
+  reverseOne.insert(3);
+  reverseOne.insert(0);
+  std::cout << reverseOne;
+  std::cout << "#########################\n" << std::endl;
+
+  std::cout << "#########################" << std::endl;
+  std::cout << "Reversing a Two Item List" << std::endl;
+  std::cout << "Using previous list, without 1" << std::endl;
+  reverseOne.remove(reverseOne[1]);
+  reverseOne.reverse();
+  std::cout << reverseOne;
+  std::cout << "#########################\n" << std::endl;
 
   return 0;
 }

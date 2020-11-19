@@ -374,6 +374,31 @@ bool LinkedList<T>::remove(const unsigned int i){
 
 template <class T>
 bool LinkedList<T>::reverse(){
+  reversed = !reversed;
+
+  // Check if there is something to return
+  if(!head) return reversed;
+  if(the_length == 1) return reversed;
+
+  // Prepare for reversal
+  Node<T> *curr = head;
+  Node<T> *next = curr->next;
+
+  while(next){
+
+    // Reverse the nodes
+    Node<T> *temp = curr;
+    if(curr == head) curr->next = NULL;
+    curr = next->next;
+    next->next = temp;
+
+    temp = next;
+    next = curr;
+    curr = temp;
+  }
+
+  head = curr;
+
   return reversed;
 }
 
